@@ -27,7 +27,7 @@ initFn3()
 // É importante saber, mas na prática é bom evitar.
 
 /**
- * Conseguimos também executar todas funções em uma linha só!
+ * Conseguimos também executar todas funções em uma linha só.
  */
 
 init()()()()
