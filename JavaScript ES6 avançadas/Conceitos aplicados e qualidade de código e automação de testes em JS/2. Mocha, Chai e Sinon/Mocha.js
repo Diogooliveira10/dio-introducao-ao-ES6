@@ -38,11 +38,31 @@
 const assert = require('assert')
 const Math = require('.../src/math.js')
 
+let value = 0
+
 describe('Math class', function() {
-    it('Sum two numbers', function() {
+    // hooks -> forma de executar código e evitar repetição
+    this.beforeEach(function() {
+        value = 0
+    })
+
+    it('Sum two numbers', function(done) {
         const math = new Math()
+        this.timeout(3000)
         
-        assert.equal(math.sum(5,5), 10)
+        value = 5
+
+        math.sum(value, 5, value => {
+            assert.equal(value, 10)
+            done()
+        })
+    })
+    // it.only('Multiply two numbers', function() { // only é focada em apenas em uma execução do teste
+    // it.skip('Multiply two numbers', function() { // outra forma de ignorar um teste
+    it('Multiply two numbers', function() {
+        const math = new Math()
+
+        assert.equal(math.multiply(value, 5), 0)
     })
 })
 
@@ -51,12 +71,17 @@ class math {
     sum(a, b, callback) {
         setTimeout(() => {
             callback(a + b)
-        }, 0)
+        }, 2500)
+    }
+    multiply(a, b) {
+        return a * b
     }
 }
 
 module.exports = Math
 
 
-// Foi feita uma interação de TDD
-// Metodo em assíncrono
+// Foi feita uma interação de TDD;
+// Metodo em assíncrono;
+// Com Mocha pode escrever testes que ainda não existe;
+// Capacidade de executar apenas um teste.
